@@ -1,3 +1,12 @@
-output：
-  console:
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/*.txt
+output.console:
     pretty: true
+
+
+
+#output.elasticsearch:
+#  # Array of hosts to connect to.
+#  hosts: ["localhost:9200"]
