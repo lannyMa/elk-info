@@ -1,0 +1,3 @@
+output：
+  console:
+    pretty: true

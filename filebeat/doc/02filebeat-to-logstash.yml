@@ -1,0 +1,29 @@
+output:
+    logstash:
+        hosts: ["192.168.197.130:5044"]
+        worker: 2
+        loadbalance: true
+        index: filebeat
+
+#这里  worker  的含义，是 beat 连到每个 host 的线程数。
+#在  loadbalance  开启的情况下，意味着有 4 个worker 轮训发送数据
+
+
+
+## logstash
+
+input {
+    beats {
+        port => 5044
+    }
+}
+output {
+    elasticsearch {
+        hosts => ["http://192.168.197.128:9200"]
+        index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+        document_type => "%{[@metadata][type]}"
+    }
+    stdout{
+        codec=>rubydebug
+    }
+}

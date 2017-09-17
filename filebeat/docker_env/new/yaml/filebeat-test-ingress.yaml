@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: filebeat-test
+spec:
+  rules:
+  - host: k8s-nginx.pp100.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: filebeat-test
+          servicePort: 80
