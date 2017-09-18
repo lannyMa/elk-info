@@ -1,0 +1,13 @@
+
+heartbeat.monitors:
+- type: http
+  urls: ["http://192.168.6.104"]
+  schedule: '@every 10s'
+tags: ["service-X", "web-tier"]
+
+
+fields:
+  env: staging
+
+output.console:
+  pretty: true

@@ -1,0 +1,12 @@
+
+heartbeat.monitors:
+- type: icmp
+  schedule: '*/5 * * * * * *'
+  hosts: ["192.168.6.6"]
+tags: ["service-X", "web-tier"]
+
+fields:
+  env: staging
+
+output.console:
+  pretty: true
