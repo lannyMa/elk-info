@@ -19,3 +19,7 @@ output.elasticsearch:
     index: "filebeat-%{+YYYY.MM.dd}"
 
 dashboards.enabled: true
+
+
+
+
