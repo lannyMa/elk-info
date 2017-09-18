@@ -2,30 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58e45769-de41-46c4-bd7e-d645fc935724" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat-console.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat-es-abctxt.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat-es-nginx.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat-logstash-es.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat-logstash.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/filebeat2.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/logstash-console-es-nginx.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/logstash-console-es.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/logstash-console.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/logstash-es-nginx.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/logstash.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/nginx-lb.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/nginx-prod.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/nginx.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/nginx1.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/filebeat/blog/no189-nginx/nginx-no132.conf" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/conf/all.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/conf/basic.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/conf/getip.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/conf/logstash-tomcat.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/conf/system-meassges.conf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filebeat/rpm_env/filebeat.yml" afterPath="$PROJECT_DIR$/filebeat/rpm_env/filebeat.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filebeat/docker_env/elk-dashboard-v5-docker" afterPath="$PROJECT_DIR$/filebeat/docker_env/elk-dashboard-v5-docker" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filebeat/blog/nginx-lb.conf" afterPath="$PROJECT_DIR$/filebeat/blog/nginx-lb.conf" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,8 +88,8 @@
       <file leaf-file-name="nginx-lb.conf" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/filebeat/blog/nginx-lb.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="116" column="5" lean-forward="false" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
+            <state relative-caret-position="470">
+              <caret line="84" column="80" lean-forward="true" selection-start-line="84" selection-start-column="80" selection-end-line="84" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -316,6 +294,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -325,7 +304,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15778251" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15778251" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -668,8 +647,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/filebeat/blog/nginx-lb.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="116" column="5" lean-forward="false" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
+        <state relative-caret-position="470">
+          <caret line="84" column="80" lean-forward="true" selection-start-line="84" selection-start-column="80" selection-end-line="84" selection-end-column="80" />
           <folding />
         </state>
       </provider>
