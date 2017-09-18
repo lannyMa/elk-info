@@ -1,0 +1,14 @@
+filebeat:
+  prospectors:
+    - input_type: log
+      paths:
+        - "/tmp/a.txt"
+      document_type: a-txt
+
+    - input_type: log
+      paths:
+         - "/tmp/b.txt"
+         - "/tmp/c.txt"
+      document_type: bc-txt
+output.logstash:
+    hosts: ["192.168.6.103:5001"]

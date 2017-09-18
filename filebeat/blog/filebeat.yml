@@ -1,0 +1,182 @@
+###################### Filebeat Configuration Example #########################
+
+# This file is an example configuration file highlighting only the most common
+# options. The filebeat.full.yml file from the same directory contains all the
+# supported options with more comments. You can use it as a reference.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/filebeat/index.html
+
+#-------------------------------- Nginx Module -------------------------------
+- module: nginx
+  # Access logs
+  access:
+    enabled: true
+
+    # Ingest Node pipeline to use. Options are `with_plugins` (default)
+    # and `no_plugins`. Use `no_plugins` if you don't have the geoip or
+    # the user agent Node ingest plugins installed.
+    #var.pipeline: with_plugins
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: [ "/usr/local/nginx/logs/access.log" ]
+
+    # Prospector configuration (advanced). Any prospector configuration option
+    # can be added under this section.
+    #prospector:
+
+  # Error logs
+  error:
+    enabled: true
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: [ "/usr/local/nginx/logs/nginx-error.log" ]
+
+    # Prospector configuration (advanced). Any prospector configuration option
+    # can be added under this section.
+    #prospector:
+
+
+#=========================== Filebeat prospectors =============================
+
+filebeat.prospectors:
+
+# Each - is a prospector. Most options can be set at the prospector level, so
+# you can use different prospectors for various configurations.
+# Below are the prospector specific configurations.
+# 指定文件的输入类型log(默认)或者stdin。
+- input_type: log
+# paths 指定要监控的日志，可以指定具体得文件或者目录
+  paths:
+    - /var/log/*.log
+
+  document_type: syslog
+    #- c:programdataelasticsearchlogs*
+
+  # Exclude lines. A list of regular expressions to match. It drops the lines that are
+  # matching any regular expression from the list.
+  # 在输入中排除符合正则表达式列表的那些行。
+  #exclude_lines: ["^DBG"]
+
+  # Include lines. A list of regular expressions to match. It exports the lines that are
+  # matching any regular expression from the list.
+  # 包含输入中符合正则表达式列表的那些行（默认包含所有行），include_lines执行完毕之后会执行exclude_lines
+  #include_lines: ["^ERR", "^WARN"]
+
+  # Exclude files. A list of regular expressions to match. Filebeat drops the files that
+  # are matching any regular expression from the list. By default, no files are dropped.
+  # 忽略掉符合正则表达式列表的文件
+  #exclude_files: [".gz$"]
+
+  # Optional additional fields. These field can be freely picked
+  # to add additional information to the crawled log files for filtering
+  # 向输出的每一条日志添加额外的信息，比如“level:debug”，方便后续对日志进行分组统计。
+  # 默认情况下，会在输出信息的fields子目录下以指定的新增fields建立子目录，例如fields.level
+  # 这个得意思就是会在es中多添加一个字段，格式为 "filelds":{"level":"debug"}
+  #fields:
+  #  level: debug
+  #  review: 1
+
+  ### Multiline options
+
+  # Mutiline can be used for log messages spanning multiple lines. This is common
+  # for Java Stack Traces or C-Line Continuation
+  # 适用于日志中每一条日志占据多行的情况，比如各种语言的报错信息调用栈
+
+  # The regexp Pattern that has to be matched. The example pattern matches all lines starting with [
+  # 多行日志开始的那一行匹配的pattern
+  #multiline.pattern: ^[
+
+  # Defines if the pattern set under pattern should be negated or not. Default is false.
+  # 是否需要对pattern条件转置使用，不翻转设为true，反转设置为false。  【建议设置为true】
+  #multiline.negate: false
+
+  # Match can be set to "after" or "before". It is used to define if lines should be append to a pattern
+  # that was (not) matched before or after or as long as a pattern is not matched based on negate.
+  # Note: After is the equivalent to previous and before is the equivalent to to next in Logstash
+  # 匹配pattern后，与前面（before）还是后面（after）的内容合并为一条日志
+  #multiline.match: after
+
+#================================ General =====================================
+
+# The name of the shipper that publishes the network data. It can be used to group
+# all the transactions sent by a single shipper in the web interface.
+# 用于发布网络数据的shipper名称. 可以被应用于组
+# 所有的事务通过一个shipper发送到web接口
+# 默认使用主机名.
+#name:
+
+# The tags of the shipper are included in their own field with each
+# transaction published.
+# shipper的标记包含在自己的field中发表事物，通过不同的tags很容易给服务器逻辑分组
+#tags: ["service-X", "web-tier"]
+
+# Optional fields that you can specify to add additional information to the
+# output.
+# 可选字段,您可以指定额外的信息添加到输出。字段可以是标量值,数组,字典,或任何的嵌套组合
+#fields:
+#  env: staging
+
+#================================ Outputs =====================================
+
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
+
+#-------------------------- Elasticsearch output ------------------------------
+# 输出到数据配置.单个实例数据可以输出到elasticsearch或者logstash选择其中一种注释掉另外一组输出配置。
+# 输出数据到Elasticsearch
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["10.10.10.202:9200"]
+
+  # Optional protocol and basic auth credentials.
+  # 输出认证.
+  #protocol: "https"
+  #username: "elastic"
+  #password: "changeme"
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+  # 输出到logstash，由logstash转发给es
+  # 配置logstash的地址，根据个人实际情况而定
+  hosts: ["10.10.10.121:5044"]
+
+  # Optional SSL. By default is off.
+  # List of root certificates for HTTPS server verifications
+  #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+
+  # Certificate for SSL client authentication
+  #ssl.certificate: "/etc/pki/client/cert.pem"
+
+  # Client Certificate Key
+  #ssl.key: "/etc/pki/client/cert.key"
+
+#----------------------------- Kafka output ----------------------------------#
+output.kafka:
+  # initial brokers for reading cluster metadata
+  # 输出到kafka，由kafka做缓存，然后传输给logstash，配合logstash_to_es.conf
+  # 配置kafka集群地址
+  hosts: ["10.10.10.121:9092", "10.10.10.123:9092", "10.10.10.125:9092"]
+
+  # message topic selection + partitioning
+  topics: '%{[type]}'
+  partition.round_robin:
+    reachable_only: false
+
+  version: 0.
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+#================================ Logging =====================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: critical, error, warning, info, debug
+#logging.level: debug
+
+# At debug level, you can selectively enable logging only for some components.
+# To enable all selectors use ["*"]. Examples of other selectors are "beat",
+# "publish", "service".
+#logging.selectors: ["*"]
