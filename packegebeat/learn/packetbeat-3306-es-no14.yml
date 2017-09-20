@@ -1,0 +1,27 @@
+packetbeat.interfaces.device: eth0
+
+packetbeat.flows:
+  timeout: 30s
+  period: 10s
+
+packetbeat.protocols.mysql:
+  ports: [3306]
+
+tags: ["service-X", "mysql614"]
+
+fields:
+  env: staging
+
+output.console:
+  pretty: true
+
+
+output.elasticsearch:
+  hosts: ["http://192.168.6.104:9200"]
+  setup.dashboards.enabled: true
+  template.enabled: true
+  template.path: "packetbeat.template.json"
+  template.overwrite: true
+  index: "packetbeat-%{+YYYY.MM.dd}"
+
+dashboards.enabled: true

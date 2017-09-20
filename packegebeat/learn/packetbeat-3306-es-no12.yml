@@ -1,0 +1,32 @@
+packetbeat.interfaces.device: eth0
+
+packetbeat.flows:
+  timeout: 30s
+  period: 10s
+
+packetbeat.protocols.icmp:
+  enabled: true
+
+packetbeat.protocols.http:
+  ports: [80, 8080, 8000, 5000, 8002]
+
+packetbeat.protocols.mysql:
+  ports: [3306]
+
+
+tags: ["612", "web-tier"]
+fields:
+  env: staging
+
+output.console:
+  pretty: true
+
+output.elasticsearch:
+  hosts: ["http://192.168.6.104:9200"]
+  setup.dashboards.enabled: true
+  template.enabled: true
+  template.path: "packetbeat.template.json"
+  template.overwrite: false
+  index: "packetbeat-%{+YYYY.MM.dd}"
+
+dashboards.enabled: true

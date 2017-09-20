@@ -1,0 +1,16 @@
+packetbeat.interfaces.device: eth0
+
+packetbeat.flows:
+  timeout: 30s
+  period: 10s
+
+packetbeat.protocols.mysql:
+  ports: [3306]
+
+tags: ["service-X", "web-tier"]
+
+fields:
+  env: staging
+
+output.console:
+  pretty: true

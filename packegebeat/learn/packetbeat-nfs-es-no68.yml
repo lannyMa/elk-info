@@ -1,0 +1,27 @@
+packetbeat.interfaces.device: eth0
+
+packetbeat.flows:
+  timeout: 30s
+  period: 10s
+
+packetbeat.protocols.nfs:
+  ports: [2049]
+
+tags: ["service-X", "nfs889"]
+
+fields:
+  env: staging
+
+output.console:
+  pretty: true
+
+
+output.elasticsearch:
+  hosts: ["http://192.168.6.104:9200"]
+  setup.dashboards.enabled: true
+  template.enabled: true
+  template.path: "packetbeat.template.json"
+  template.overwrite: false
+  index: "packetbeat-%{+YYYY.MM.dd}"
+
+dashboards.enabled: true
