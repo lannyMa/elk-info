@@ -1,0 +1,80 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tomcat-spring
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: tomcat-spring
+    spec:
+      containers:
+      - image: filebeat:5.4.1-v3
+        name: filebeat
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: app-logs
+          mountPath: /log
+        - name: tomcat-spring
+          mountPath: /etc/filebeat/
+      - image: tomcat:spring
+        name : tomcat-spring
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: app-logs
+          mountPath: /data/tomcat/logs/
+      volumes:
+      - name: tomcat-spring
+        configMap:
+          name: tomcat-spring
+      - name: app-logs
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-spring
+  labels:
+    app: tomcat-spring
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: tomcat-spring
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tomcat-spring
+data:
+  filebeat.yml: |
+    filebeat.prospectors:
+    - input_type: log
+      fields:
+        service-name: tomcat-spring
+        #pod-ip
+      paths:
+        - "/log/*.txt"
+      multiline:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{3}'
+        negate: true
+        match: after
+    output.elasticsearch:
+      hosts: ["elasticsearch.logging.svc.cluster.local:9200"]
+      username: "elastic"
+      password: "changeme"
+      template.name: "filebeat"
+      template.path: "filebeat.template.json"
+      template.overwrite: true
+      index: "filebeat-docker-test"
+    # Available log levels are: critical, error, warning, info, debug
+    logging.level: info

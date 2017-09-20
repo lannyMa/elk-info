@@ -1,0 +1,6 @@
+output:
+    logstash:
+        hosts: ["192.168.197.130:5044"]
+        worker: 2
+        loadbalance: true
+        index: filebeat

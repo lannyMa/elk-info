@@ -1,0 +1,9 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /tmp/a.txt
+output.console:
+    pretty: true
+
+
+

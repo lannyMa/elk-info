@@ -1,8 +1,0 @@
-filebeat:
-  prospectors:
-    - input_type: log
-      paths:
-        - "/tmp/d.txt"
-      document_type: d-txt
-output.logstash:
-    hosts: ["192.168.6.103:5001"]

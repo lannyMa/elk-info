@@ -1,0 +1,12 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /tmp/*.txt
+output:
+  logstash:
+    hosts: ["192.168.6.103:5001"]
+
+
+
+
+

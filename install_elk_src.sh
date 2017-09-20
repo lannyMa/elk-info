@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-
-
-
-
-
+# install elk
 curl 192.168.6.52/install_jdk1.8.sh|bash
 useradd elk
 

@@ -1,0 +1,57 @@
+###################### Filebeat Configuration Example #########################
+
+# This file is an example configuration file highlighting only the most common
+# options. The filebeat.full.yml file from the same directory contains all the
+# supported options with more comments. You can use it as a reference.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/filebeat/index.html
+
+
+#-------------------------------- Nginx Module -------------------------------
+- module: nginx
+  # Access logs
+  access:
+    enabled: true
+
+    # Ingest Node pipeline to use. Options are `with_plugins` (default)
+    # and `no_plugins`. Use `no_plugins` if you don't have the geoip or
+    # the user agent Node ingest plugins installed.
+    #var.pipeline: with_plugins
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: [ "/var/log/nginx/access.log" ]
+
+    # Prospector configuration (advanced). Any prospector configuration option
+    # can be added under this section.
+    #prospector:
+
+  # Error logs
+  error:
+    enabled: true
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: [ "/var/log/nginx/error.log" ]
+
+    # Prospector configuration (advanced). Any prospector configuration option
+    # can be added under this section.
+    #prospector:
+
+filebeat:
+  prospectors:
+    - input_type: log
+      paths:
+        - "/tmp/a.txt"
+      document_type: a-txt
+
+    - input_type: log
+      paths:
+         - "/tmp/b.txt"
+         - "/tmp/c.txt"
+      document_type: bc-txt
+output:
+  logstash:
+    enabled: true
+    hosts: ["192.168.6.103:5001"]
+    index: logstash
